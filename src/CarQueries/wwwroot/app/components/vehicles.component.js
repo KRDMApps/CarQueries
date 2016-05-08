@@ -1,4 +1,4 @@
-System.register(["angular2/core", "angular2/src/common/directives/core_directives", "./api.service"], function(exports_1, context_1) {
+System.register(["angular2/core", "angular2/src/common/directives/core_directives", "./api.service", "../models"], function(exports_1, context_1) {
     "use strict";
     var __moduleName = context_1 && context_1.id;
     var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
@@ -22,25 +22,63 @@ System.register(["angular2/core", "angular2/src/common/directives/core_directive
             },
             function (api_service_1_1) {
                 api_service_1 = api_service_1_1;
-            }],
+            },
+            function (_1) {}],
         execute: function() {
+            //import {Column} from "./grid.component";
             ApiComponent = (function () {
+                //columns: any[];
                 function ApiComponent(service) {
                     this.service = service;
-                    this.apiOccurances = 0;
                     this.isLoading = false;
+                    //details: carQueryModels.Style[];
+                    this.selectedMake = "0";
+                    this.selectedModel = "0";
+                    this.selectedYear = "0";
+                    //this.columns.push(new Column("name", "Name"));
+                    //this.columns.push(new Column("equipmentType", "Equipment Type"));
+                    //this.columns.push(new Column("compressionRatio", "Compression Ratio"));
+                    //this.columns.push(new Column("cylinder", "Cylinder"));
+                    //this.columns.push(new Column("size", "Size"));
+                    //this.columns.push(new Column("displacement", "Displacement"));
+                    //this.columns.push(new Column("configuration", "Configuration"));
+                    //this.columns.push(new Column("fuelType", "Fuel Type"));
+                    //this.columns.push(new Column("horsepower", "Horsepower"));
+                    //this.columns.push(new Column("torque", "Torque"));
+                    //this.columns.push(new Column("totalValves", "Total Valves"));
+                    //this.columns.push(new Column("manufacturerEngineCode", "Manufacturer Engine Code"));
+                    //this.columns.push(new Column("type", "Type"));
+                    //this.columns.push(new Column("code", "Code"));
+                    //this.columns.push(new Column("compressorType", "Compressor Type"));
+                    //this.columns.push(new Column("rpm", "Rpm"));
+                    //this.columns.push(new Column("valve", "Valve"));
                 }
-                ApiComponent.prototype.ngOnInit = function () {
-                    this.get();
+                ApiComponent.prototype.onMakeSelect = function (selectedMake) {
+                    this.models = this.makes.filter(function (item) { return item.name == selectedMake; })[0].models;
                 };
-                ApiComponent.prototype.get = function () {
+                ApiComponent.prototype.onModelSelect = function (selectedModel) {
+                    this.years = this.models.filter(function (item) { return item.name == selectedModel; })[0].years;
+                };
+                ApiComponent.prototype.ngOnInit = function () {
+                    this.getAllMakes();
+                };
+                ApiComponent.prototype.getAllMakes = function () {
                     var _this = this;
                     this.isLoading = true;
-                    this.service.get(function (json) {
+                    this.service.getAllMakes(function (json) {
                         if (json) {
-                            _this.data = json.numbers;
+                            _this.makes = json.makes;
                             _this.isLoading = false;
-                            _this.apiOccurances++;
+                        }
+                    });
+                };
+                ApiComponent.prototype.getVehicleDetails = function () {
+                    var _this = this;
+                    this.isLoading = true;
+                    this.service.getVehicleDetails(function (json) {
+                        if (json) {
+                            //this.details = json.styles;
+                            _this.isLoading = false;
                         }
                     });
                 };

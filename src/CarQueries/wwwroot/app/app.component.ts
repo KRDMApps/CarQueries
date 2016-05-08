@@ -1,6 +1,7 @@
 ﻿import {Component, OnInit} from "angular2/core";
 import {AsyncRoute, Router, RouteDefinition, RouteConfig, Location, ROUTER_DIRECTIVES} from "angular2/router";
 import {StaticComponent} from "./components/static.component";
+//import {Grid} from "./components/grid.component"
 
 declare var System: any;
 
@@ -12,10 +13,7 @@ declare var System: any;
 
 export class AppComponent implements OnInit {
     public routes: RouteDefinition[] = null;
-    constructor(private router: Router,
-        private location: Location) {
-
-    }
+    constructor(private router: Router, private location: Location) { }
 
     ngOnInit() {
         if (this.routes === null) {

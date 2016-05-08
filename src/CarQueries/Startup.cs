@@ -1,4 +1,5 @@
-﻿using Glimpse;
+﻿using CarQueries.Models;
+using Glimpse;
 using Microsoft.AspNet.Builder;
 using Microsoft.AspNet.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -28,6 +29,7 @@ namespace CarQueries
             // Add framework services.
             services.AddGlimpse();
             services.AddMvc();
+            services.Configure<EdmundsAPISettings>(Configuration.GetSection("EdmundsAPI"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -38,7 +40,7 @@ namespace CarQueries
 
             if (env.IsDevelopment())
             {
-                app.UseBrowserLink();
+                //app.UseBrowserLink();
                 app.UseDeveloperExceptionPage();
             }
             else
