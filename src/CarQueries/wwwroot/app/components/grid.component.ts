@@ -1,5 +1,4 @@
-﻿import {Component} from 'angular2/core';
-import {CORE_DIRECTIVES} from "angular2/src/common/directives/core_directives";
+﻿import {Component} from '@angular/core';
 import "../models";
 
 @Component({
@@ -7,7 +6,7 @@ import "../models";
     inputs: ['rows: rows', 'columns: columns'],
     templateUrl: './components/grid.html'
 })
-export class Grid {
+export class GridComponent {
     columns: Array<Column>;
     rows: Array<any>;
     sorter: Sorter;
